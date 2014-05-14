@@ -6,3 +6,12 @@
 ``` shell
 npm install
 ```
+
+## create db
+
+``` shell
+
+mongo
+use crud
+
+```
