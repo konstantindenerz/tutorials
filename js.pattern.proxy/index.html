@@ -1,0 +1,52 @@
+<script type='text/javascript'>
+
+  // Proxy Class
+  function Proxy(target, beforeMethod, afterMethod){
+    var self = this;
+      (function init(){
+        for(var propertyName in target){
+          var property = target[propertyName];
+          if(typeof property === 'function'){
+            (function createProxyMethod(target, targetMethod){
+              self[propertyName] = function(){
+                beforeMethod();
+                targetMethod.apply(target, arguments);
+                if(typeof afterMethod === 'function'){
+                  afterMethod();
+                }
+              };
+            })(target, property);
+          }
+        }
+      })();
+  }
+
+  function Hero(name){
+    Hero.prototype.protect = function(){
+      console.log(name, 'protects');
+    };
+  }
+
+  var heroFactory = {
+    create: function(name){
+      var hero = new Hero(name);
+      if(name === 'InvisibleWoman'){
+        // PretectiveInvisibleShieldProxy
+        hero = new Proxy(hero, function activateShield(){
+          console.log('Protective invisible shiled is active');
+        });
+      }
+      return hero;
+    }
+  }
+
+  // Demo
+
+  var invisibleWoman = heroFactory.create('InvisibleWoman');
+  invisibleWoman.protect();
+
+  var batman = heroFactory.create('Batman');
+  batman.protect();
+
+
+</script>
