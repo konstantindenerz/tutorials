@@ -1,0 +1,30 @@
+<script>
+	/**
+		Return a delegate to a method of a context. The delegate has an invoke method to execute the referenced method.
+	*/
+	function delegate(context, method){
+		return {
+			invoke: function(){
+				if(method && typeof method.apply === 'function'){
+					return method.apply(context, arguments);
+				}
+			}
+		}
+	}
+
+    var calculator = {
+    	c: 1,
+    	add: function add(a, b){
+			return a + b + this.c;
+		}
+    };
+	
+
+    // create a delegate
+	var addDelegate = delegate(calculator, calculator.add);
+
+	// invoke the method with different parameters on the calculator context
+	var result = addDelegate.invoke(40, 1);
+	console.log(result); // result === 42
+
+</script>
