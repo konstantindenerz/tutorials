@@ -1,0 +1,16 @@
+{
+  "name": "js.jade.forms",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "konstantin.denerz",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jade": "^0.12.0",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}
